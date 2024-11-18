@@ -68,7 +68,7 @@ void loop() {
                       ", \"humidity\": " + String(humidity) + 
                       ", \"light_level\": " + String(lightLevel) + 
                       ", \"pressure\": " + String(pressure) +
-                      ", \ppm\": " + String(ppm) +
+                      ", \"ppm\": " + String(ppm) +
                       "}";
 
     // Inicia la conexión al endpoint FastAPI
