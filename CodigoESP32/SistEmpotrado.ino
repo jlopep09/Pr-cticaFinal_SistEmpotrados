@@ -1,6 +1,8 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <DHT.h>
+#include <Adafruit_BMP085.h>
+#include "MQ135.h"
 
 //NETWORK CONFIG
 const char* ssid = "wifiName";
@@ -14,6 +16,12 @@ int send_interval = 10000;
 #define PHOTO_PIN 32
 #define DHTPIN 19 
 
+//BMP180 CONFIG
+Adafruit_BMP085 bmp;
+
+//MQ135 CONFIG
+const int ANALOGPIN = 13;
+MQ135 gasSensor = MQ135(ANALOGPIN);
 
 //EXTRA DHT CONFIG
 #define DHTTYPE DHT22    
@@ -32,6 +40,11 @@ void connectToWiFi() {
 void setup() {
   Serial.begin(115200);
   dht.begin();
+
+  if (!bmp.begin()) {
+    Serial.println("BMP180 Not Found. CHECK CIRCUIT!");
+  }
+
   connectToWiFi();
 }
 
@@ -42,7 +55,8 @@ void loop() {
     float temperature = dht.readTemperature();
     float humidity = dht.readHumidity();
     int lightLevel = analogRead(PHOTO_PIN);
-
+    int pressure = bmp.readPressure();
+    float ppm = gasSensor.getPPM();
 
     if (isnan(temperature) || isnan(humidity)) {
       Serial.println("Error al leer el sensor DHT22");
@@ -52,7 +66,10 @@ void loop() {
     // Crear el JSON
     String postData = "{\"temperature\": " + String(temperature) + 
                       ", \"humidity\": " + String(humidity) + 
-                      ", \"light_level\": " + String(lightLevel) + "}";
+                      ", \"light_level\": " + String(lightLevel) + 
+                      ", \"pressure\": " + String(pressure) +
+                      ", \ppm\": " + String(ppm) +
+                      "}";
 
     // Inicia la conexión al endpoint FastAPI
     http.begin(serverName);
