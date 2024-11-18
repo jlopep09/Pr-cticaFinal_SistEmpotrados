@@ -19,14 +19,14 @@
 CREATE DATABASE IF NOT EXISTS `esp32db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
 USE `esp32db`;
 
--- Volcando estructura para tabla esp32db.reads
-CREATE TABLE IF NOT EXISTS `reads` (
+-- Volcando estructura para tabla esp32db.sensor_reads
+CREATE TABLE IF NOT EXISTS `sensor_reads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `humidity` int(11) DEFAULT 0,
   `light` float DEFAULT 0,
   `temperature` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
 
