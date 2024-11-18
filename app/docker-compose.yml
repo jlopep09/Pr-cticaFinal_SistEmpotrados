@@ -25,5 +25,18 @@ services:
     networks:
       - mariadb_network
 
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./COMPONENTS/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./COMPONENTS/caddy/site:/srv
+      
 networks:
   mariadb_network:
