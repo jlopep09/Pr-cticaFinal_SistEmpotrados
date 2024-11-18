@@ -29,7 +29,7 @@ async def receive_data(data: SensorData):
     
     return {"message": "Data received successfully"}
 
-@router.post("/reads")
+@router.get("/reads")
 async def receive_data(data: SensorData):
 
     return get_reads()
