@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from fastapi import Response
+from  controllers.db_controller import get_reads
 
 
 from pydantic import BaseModel
@@ -27,3 +28,8 @@ async def receive_data(data: SensorData):
     print(f"Temperature: {data.temperature} °C, Humidity: {data.humidity} %, Light: {data.light_level} ")
     
     return {"message": "Data received successfully"}
+
+@router.post("/reads")
+async def receive_data(data: SensorData):
+
+    return get_reads()
