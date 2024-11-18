@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: ./COMPONENTS/fastapi/
+      target: builder
+    environment:
+      PORT: 8000
+    ports:
+      - '8000:8000'
+    restart: "no"
+    volumes:
+      - ./COMPONENTS/fastapi/app:/code/app
+    networks:
+      - mariadb_network
+  db:
+    image: mariadb
+    container_name: mariadb_atm
+    restart: "no"
+    environment:
+      MARIADB_ROOT_PASSWORD: 123456
+    ports:
+      - 3306:3306
+    volumes:
+      - ./COMPONENTS/mariadb/mariadb_data:/var/lib/mysql
+    networks:
+      - mariadb_network
+
+networks:
+  mariadb_network:
