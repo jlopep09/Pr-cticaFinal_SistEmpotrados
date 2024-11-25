@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         11.5.2-MariaDB-ubu2404 - mariadb.org binary distribution
+-- Host:                         localhost
+-- Versión del servidor:         11.6.2-MariaDB-ubu2404 - mariadb.org binary distribution
 -- SO del servidor:              debian-linux-gnu
 -- HeidiSQL Versión:             12.8.0.6908
 -- --------------------------------------------------------
@@ -14,17 +14,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Volcando estructura de base de datos para esp32db
-CREATE DATABASE IF NOT EXISTS `esp32db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
-USE `esp32db`;
-
 -- Volcando estructura para tabla esp32db.sensor_reads
 CREATE TABLE IF NOT EXISTS `sensor_reads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `humidity` int(11) DEFAULT 0,
   `light` float DEFAULT 0,
-  `temperature` int(11) DEFAULT 0,
+  `temperature` float DEFAULT 0,
+  `pressure` int(11) DEFAULT 0,
+  `ppm` float DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
