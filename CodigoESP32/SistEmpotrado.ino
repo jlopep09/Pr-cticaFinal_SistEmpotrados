@@ -24,7 +24,7 @@ const int ANALOGPIN = 13;
 MQ135 gasSensor = MQ135(ANALOGPIN);
 
 //EXTRA DHT CONFIG
-#define DHTTYPE DHT22    
+#define DHTTYPE DHT11    
 DHT dht(DHTPIN, DHTTYPE);
 
 
