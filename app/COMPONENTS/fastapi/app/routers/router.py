@@ -22,7 +22,7 @@ async def root():
 @router.post("/sensordata")
 async def receive_data(data: SensorData):
     # Imprimir los datos en la consola
-    #print(f"Temperature: {data.temperature} °C, Humidity: {data.humidity} %, Light: {data.light_level} ")
+    print(f"Temperature: {data.temperature} °C, Humidity: {data.humidity} %, Light: {data.light_level}, pressure:{data.pressure} , ppm:{data.ppm}")
     
     return add_read(data)
 
