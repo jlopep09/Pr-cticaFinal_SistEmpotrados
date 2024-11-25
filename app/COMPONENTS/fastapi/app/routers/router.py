@@ -26,7 +26,7 @@ async def receive_data(data: SensorData):
     
     return add_read(data)
 
-@router.get("/reads")
-async def receive_data(data: SensorData):
+@router.get("/sensordata")
+async def receive_data():
 
     return get_reads()
