@@ -1,13 +1,13 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
-//#include <DHT.h>
-//#include <Adafruit_BMP085.h>
-//#include "MQ135.h"
+#include <DHT.h>
+#include <Adafruit_BMP085.h>
+#include "MQ135.h"
 
 //NETWORK CONFIG
-const char* ssid = "jlopep09";
-const char* password = "jlopep09";
-const char* serverName = "http://192.168.140.240:8000/data/sensordata";
+const char* ssid = "wifiName";
+const char* password = "wifiPass";
+const char* serverName = "http://localhost:apiport/apiruteexample";
 
 //INTERVAL CONFIG
 int send_interval = 10000;
@@ -17,15 +17,15 @@ int send_interval = 10000;
 #define DHTPIN 19 
 
 //BMP180 CONFIG
-//Adafruit_BMP085 bmp;
+Adafruit_BMP085 bmp;
 
 //MQ135 CONFIG
 const int ANALOGPIN = 13;
-//MQ135 gasSensor = MQ135(ANALOGPIN);
+MQ135 gasSensor = MQ135(ANALOGPIN);
 
 //EXTRA DHT CONFIG
 #define DHTTYPE DHT11    
-//DHT dht(DHTPIN, DHTTYPE);
+DHT dht(DHTPIN, DHTTYPE);
 
 
 void connectToWiFi() {
@@ -39,11 +39,11 @@ void connectToWiFi() {
 
 void setup() {
   Serial.begin(115200);
-  //dht.begin();
+  dht.begin();
 
-  //if (!bmp.begin()) {
-  ////  Serial.println("BMP180 Not Found. CHECK CIRCUIT!");
-  //}
+  if (!bmp.begin()) {
+    Serial.println("BMP180 Not Found. CHECK CIRCUIT!");
+  }
 
   connectToWiFi();
 }
@@ -52,11 +52,11 @@ void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
 
-    float temperature = 10;//dht.readTemperature();
-    float humidity = 10;//dht.readHumidity();
-    int lightLevel = 10;//analogRead(PHOTO_PIN);
-    int pressure = 10;//bmp.readPressure();
-    float ppm = 10;//gasSensor.getPPM();
+    float temperature = dht.readTemperature();
+    float humidity = dht.readHumidity();
+    int lightLevel = analogRead(PHOTO_PIN);
+    int pressure = bmp.readPressure();
+    float ppm = gasSensor.getPPM();
 
     if (isnan(temperature) || isnan(humidity)) {
       Serial.println("Error al leer el sensor DHT11");
