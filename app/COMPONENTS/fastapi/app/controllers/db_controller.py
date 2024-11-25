@@ -44,11 +44,11 @@ def add_read(data: SensorData):
 
         # Crear la consulta para insertar los datos
         query = """
-            INSERT INTO sensor_reads (temperature, humidity, light)
-            VALUES (%s, %s, %s)
+            INSERT INTO sensor_reads (temperature, humidity, light, pressure, ppm)
+            VALUES (%s, %s, %s, %s, %s)
         """
         # Ejecutar la consulta con los valores
-        cur.execute(query, (data.temperature, data.humidity, data.light_level))
+        cur.execute(query, (data.temperature, data.humidity, data.light_level, data.pressure, data.ppm))
         
         # Confirmar los cambios
         conn.commit()

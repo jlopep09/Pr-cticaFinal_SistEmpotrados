@@ -4,3 +4,6 @@ class SensorData(BaseModel):
     temperature: float
     humidity: float
     light_level: int
+    pressure: int
+    ppm: float
+    
