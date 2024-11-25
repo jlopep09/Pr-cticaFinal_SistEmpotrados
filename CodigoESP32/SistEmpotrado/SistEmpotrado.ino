@@ -59,7 +59,7 @@ void loop() {
     float ppm = gasSensor.getPPM();
 
     if (isnan(temperature) || isnan(humidity)) {
-      Serial.println("Error al leer el sensor DHT22");
+      Serial.println("Error al leer el sensor DHT11");
       return;
     }
 
