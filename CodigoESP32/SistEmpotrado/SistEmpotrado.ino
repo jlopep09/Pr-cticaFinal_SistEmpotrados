@@ -3,6 +3,11 @@
 #include <DHT.h>
 #include <Adafruit_BMP085.h>
 #include "MQ135.h"
+#include <Wire.h>
+
+// Define los pines SDA y SCL si usas GPIO1 y GPIO2
+#define SDA_PIN 1
+#define SCL_PIN 2
 
 //NETWORK CONFIG
 const char* ssid = "wifiName";
@@ -13,14 +18,14 @@ const char* serverName = "http://localhost:apiport/apiruteexample";
 int send_interval = 10000;
 
 //INPUT PIN
-#define PHOTO_PIN 32
-#define DHTPIN 19 
+#define PHOTO_PIN 4
+#define DHTPIN 10 
 
 //BMP180 CONFIG
 Adafruit_BMP085 bmp;
 
 //MQ135 CONFIG
-const int ANALOGPIN = 13;
+const int ANALOGPIN = 7;
 MQ135 gasSensor = MQ135(ANALOGPIN);
 
 //EXTRA DHT CONFIG
@@ -40,6 +45,8 @@ void connectToWiFi() {
 void setup() {
   Serial.begin(115200);
   dht.begin();
+
+  Wire.begin(SDA_PIN, SCL_PIN);
 
   if (!bmp.begin()) {
     Serial.println("BMP180 Not Found. CHECK CIRCUIT!");
