@@ -10,9 +10,9 @@
 #define SCL_PIN 2
 
 //NETWORK CONFIG
-const char* ssid = "wifiName";
-const char* password = "wifiPass";
-const char* serverName = "http://localhost:apiport/apiruteexample";
+const char* ssid = "jlopep08";
+const char* password = "jlopep08";
+const char* serverName = "http://192.168.1.35:8000/data/sensordata";
 
 //INTERVAL CONFIG
 int send_interval = 10000;
@@ -62,8 +62,8 @@ void loop() {
     float temperature = dht.readTemperature();
     float humidity = dht.readHumidity();
     int lightLevel = analogRead(PHOTO_PIN);
-    int pressure = bmp.readPressure();
-    float ppm = gasSensor.getPPM();
+    float pressure = bmp.readPressure()/1000.0; //unidad en KPa
+    int ppm = gasSensor.getPPM()/100000;
 
     if (isnan(temperature) || isnan(humidity)) {
       Serial.println("Error al leer el sensor DHT11");
