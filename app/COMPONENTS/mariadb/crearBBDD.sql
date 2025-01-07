@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
--- Host:                         localhost
--- Versión del servidor:         11.6.2-MariaDB-ubu2404 - mariadb.org binary distribution
+-- Host:                         127.0.0.1
+-- Versión del servidor:         11.5.2-MariaDB-ubu2404 - mariadb.org binary distribution
 -- SO del servidor:              debian-linux-gnu
 -- HeidiSQL Versión:             12.8.0.6908
 -- --------------------------------------------------------
@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS `sensor_reads` (
   `humidity` int(11) DEFAULT 0,
   `light` float DEFAULT 0,
   `temperature` float DEFAULT 0,
-  `pressure` int(11) DEFAULT 0,
-  `ppm` float DEFAULT 0,
+  `pressure` float DEFAULT NULL,
+  `ppm` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
 
