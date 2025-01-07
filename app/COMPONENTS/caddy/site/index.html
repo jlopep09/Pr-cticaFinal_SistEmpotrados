@@ -8,7 +8,7 @@
     <script>
         // Función para obtener datos de una API y actualizar la tabla
         async function fetchAndPopulateTable() {
-          const apiUrl = 'http://192.168.140.240:8000/data/sensordata'; // Cambia esta URL por la de tu API
+          const apiUrl = 'http://192.168.1.35:8000/data/sensordata'; // Cambia esta URL por la de tu API
           try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
@@ -54,10 +54,6 @@
     <nav class="navbar" style="background-color: #f6fbff;">
         <div class="container">
             <a class="navbar-brand">Módulo Atmosférico</a>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
     </nav>
     <h1 class="container-fluid" style="text-align: center;font-weight: bold;">Lecturas</h1>
