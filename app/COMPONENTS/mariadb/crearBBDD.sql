@@ -27,8 +27,9 @@ CREATE TABLE IF NOT EXISTS `sensor_reads` (
   `temperature` float DEFAULT 0,
   `pressure` float DEFAULT NULL,
   `ppm` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=177 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=465 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
 
