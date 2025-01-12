@@ -63,7 +63,7 @@ void loop() {
     float humidity = dht.readHumidity();
     int lightLevel = analogRead(PHOTO_PIN);
     float pressure = bmp.readPressure()/1000.0; //unidad en KPa
-    int ppm = gasSensor.getPPM()/100000;
+    int ppm = gasSensor.getPPM()/10000;// /100000
 
     if (isnan(temperature) || isnan(humidity)) {
       Serial.println("Error al leer el sensor DHT11");
