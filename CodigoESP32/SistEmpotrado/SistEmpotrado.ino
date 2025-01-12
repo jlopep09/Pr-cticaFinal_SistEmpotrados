@@ -10,12 +10,12 @@
 #define SCL_PIN 2
 
 //NETWORK CONFIG
-const char* ssid = "jlopep08";
-const char* password = "jlopep08";
-const char* serverName = "http://192.168.1.35:8000/data/sensordata";
+const char* ssid = "jlopep06";
+const char* password = "jlopep06";
+const char* serverName = "http://192.168.174.240:8000/data/sensordata";
 
 //INTERVAL CONFIG
-int send_interval = 10000;
+int send_interval = 60000;
 
 //INPUT PIN
 #define PHOTO_PIN 4
