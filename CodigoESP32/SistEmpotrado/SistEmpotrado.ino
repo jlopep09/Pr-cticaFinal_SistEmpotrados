@@ -31,7 +31,7 @@ MQ135 gasSensor = MQ135(ANALOGPIN);
 //EXTRA DHT CONFIG
 #define DHTTYPE DHT11    
 DHT dht(DHTPIN, DHTTYPE);
-int temp = 128;
+//int temp = 128;
 
 void connectToWiFi() {
   WiFi.begin(ssid, password);
@@ -63,14 +63,14 @@ void loop() {
     float humidity = dht.readHumidity();
     int lightLevel = analogRead(PHOTO_PIN);
     float pressure = bmp.readPressure()/1000.0; //unidad en KPa
-    int ppm = gasSensor.getPPM()/10000;// /100000
-    if(ppm<2147483640){
-      temp = ppm;
-    }else{
+    int ppm = gasSensor.getPPM();// /100000
+    //if(ppm<2147483640){
+    //  temp = ppm;
+    //}else{
       //no valido
-      ppm = temp;
+    //  ppm = temp;
 
-    }
+    //}
     if (isnan(temperature) || isnan(humidity)) {
       Serial.println("Error al leer el sensor DHT11");
       return;
