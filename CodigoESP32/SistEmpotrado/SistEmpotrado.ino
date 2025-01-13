@@ -4,18 +4,30 @@
 #include <Adafruit_BMP085.h>
 #include "MQ135.h"
 #include <Wire.h>
+//Librerias usadas(algunas no se usan pero las tengo instaladas por si acaso)
+//NTPClient - Fabrice Weinberg V3.2.1
+//Adafruit BMP085 Library - Adafruit v1.2.4
+//Adafruit BusIO - Adafruit v1.16.3
+//Adafruit Unified Sensor - Adafruit 1.1.15
+//AsyncTCP - dvarrel 1.1.4
+//DHT sensor library- Adafruit v1.4.6
+//ESP Async WebServer - Me-No-Dev v3.6.0
+//ESP Async TCP - dvarrel v1.2.4
+//MQ135 GreorgK - ViliusKraujutis v1.1.1
+//MQUnifiedsensor - Miguel Califa v3.0.0
+//Time - Michael Morgolis v1.6.1
 
 // Define los pines SDA y SCL si usas GPIO1 y GPIO2
 #define SDA_PIN 1
 #define SCL_PIN 2
 
 //NETWORK CONFIG
-const char* ssid = "jlopep06";
-const char* password = "jlopep06";
-const char* serverName = "http://192.168.174.240:8000/data/sensordata";
+const char* ssid = "jlopep06"; //wifiname 
+const char* password = "jlopep06"; //wifipass
+const char* serverName = "http://192.168.174.240:8000/data/sensordata"; //fastapi endpoint 
 
 //INTERVAL CONFIG
-int send_interval = 60000;
+int send_interval = 60000; //1 min = 60000
 
 //INPUT PIN
 #define PHOTO_PIN 4
@@ -31,7 +43,6 @@ MQ135 gasSensor = MQ135(ANALOGPIN);
 //EXTRA DHT CONFIG
 #define DHTTYPE DHT11    
 DHT dht(DHTPIN, DHTTYPE);
-//int temp = 128;
 
 void connectToWiFi() {
   WiFi.begin(ssid, password);
@@ -63,14 +74,8 @@ void loop() {
     float humidity = dht.readHumidity();
     int lightLevel = analogRead(PHOTO_PIN);
     float pressure = bmp.readPressure()/1000.0; //unidad en KPa
-    int ppm = gasSensor.getPPM();// /100000
-    //if(ppm<2147483640){
-    //  temp = ppm;
-    //}else{
-      //no valido
-    //  ppm = temp;
+    int ppm = gasSensor.getPPM(); //Algunos usuarios recomiendan dividir el resultado entre 100000 creo que para usar el CO2
 
-    //}
     if (isnan(temperature) || isnan(humidity)) {
       Serial.println("Error al leer el sensor DHT11");
       return;
@@ -104,5 +109,5 @@ void loop() {
     connectToWiFi();
   }
 
-  delay(send_interval); // Cada minuto (ajustable)
+  delay(send_interval);
 }
